@@ -1,5 +1,4 @@
 # LZW
-var arraySymbols = [""];
 /**
   Returns list of codes: a comma separated string of the LZW compression decimal numbers (the last code must be 0)
   symbols: sorted string of valid data symbols for the text. The index will be the code of the intial dictionary
@@ -10,7 +9,7 @@ function encode(symbols, stop, text) {
 
 	var textEncode = "";
 	var textArray = text.split('');
-
+	var arraySymbols = [""];
 	for (var i = 1; i < symbols.length; i++) {
 		arraySymbols[i] = symbols.charAt(i);
 	}
@@ -21,7 +20,7 @@ function encode(symbols, stop, text) {
 			textEncode += "0";
 			break;
 		}
-		while(find(currentStr, textArray[j+1])){
+		while(find(arraySymbols, currentStr, textArray[j+1])){
 			currentStr = currentStr + textArray[j+1];
 			j++;
 		}
@@ -36,7 +35,7 @@ function encode(symbols, stop, text) {
 
 }
 
-function find(currentStr, nextChar){
+function find(arraySymbols, currentStr, nextChar){
 
 	var totalStr = currentStr+nextChar;
 
@@ -59,6 +58,7 @@ function decode(symbols, code) {
 
 	var textUncompressed = "";
 
+	var arraySymbols = [""];
 	for (var i = 1; i < symbols.length; i++) {
 		arraySymbols[i] = symbols.charAt(i);
 	}
@@ -66,6 +66,14 @@ function decode(symbols, code) {
 	for (var i = 0; i < arrayCode.length-1; i++) {
 		
 		var currentChar = arraySymbols[arrayCode[i]];
+
+		if(currentChar == ""){
+			break;
+		}
+
+		if(arraySymbols[arrayCode[i+1]] == undefined){
+			break;
+		}
 
 		var nextChar = arraySymbols[arrayCode[i+1]].charAt(0);
 		textUncompressed += currentChar;
