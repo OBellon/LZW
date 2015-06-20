@@ -9,23 +9,24 @@ var arraySymbols = [""];
 function encode(symbols, stop, text) {
 
 	var textEncode = "";
+	var textArray = text.split('');
 
 	for (var i = 1; i < symbols.length; i++) {
 		arraySymbols[i] = symbols.charAt(i);
 	}
 	var j = 0;
 	for (var i = 0; i < text.length; i++) {
-		var currentStr = text.charAt(j);
+		var currentStr = textArray[j];
 		if (currentStr == stop) {
 			textEncode += "0";
 			break;
 		}
-		while(find(currentStr, text.charAt(j+1))){
-			currentStr = currentStr + text.charAt(j+1);
+		while(find(currentStr, textArray[j+1])){
+			currentStr = currentStr + textArray[j+1];
 			j++;
 		}
 		
-		arraySymbols.push(currentStr + text.charAt(j+1));
+		arraySymbols.push(currentStr + textArray[j+1]);
 		textEncode += arraySymbols.indexOf(currentStr) + ",";
 
 		j++;
