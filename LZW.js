@@ -25,7 +25,7 @@ function encode(symbols, stop, text) {
 			j++;
 		}
 		
-		arraySymbols[arraySymbols.length] = currentStr + text.charAt(j+1);
+		arraySymbols.push(currentStr + text.charAt(j+1));
 		textEncode += arraySymbols.indexOf(currentStr) + ",";
 
 		j++;
