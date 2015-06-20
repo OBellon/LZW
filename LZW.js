@@ -80,6 +80,6 @@ function decode(symbols, code) {
 		arraySymbols[arraySymbols.length] = currentChar+nextChar;
 	}	
 
-	console.log(textUncompressed+'#');
+	console.log(textUncompressed+symbols.charAt(0));
 
 }
